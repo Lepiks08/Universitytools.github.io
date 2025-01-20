@@ -1,0 +1,275 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image:url(bg.webp); 
+    color: #333333; /* Dark gray text */
+    padding-bottom: 60px;
+}
+.tlogo {
+    position: relative;
+    color: #fff7f7; /* Dark text */
+    top: 20px;
+}
+/* Header Section */
+header {
+    background-image:url(bg\ 2.jpg); 
+    color: #fff7f7; /* Dark text */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    width: 50px; /* Set the width of the logo */
+    height: auto; /* Maintain the aspect ratio of the logo */
+}
+
+
+header .nav-links {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .nav-left {
+    display: flex;
+    gap: 20px;
+}
+
+header .nav-right {
+    margin-left: auto;
+}
+
+header .nav-links a {
+    color: #333333; /* Dark text for links */
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+
+header .nav-links a:hover {
+    text-decoration: underline;
+    color: #FF9F80; /* Dark Peach on hover */
+}
+
+/* Main content */
+main {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: flex-start; /* Align the items from top */
+    min-height: 80vh; /* Ensure the section takes up enough space */
+}
+
+/* Team Section */
+.team-section {
+    text-align: center;
+    max-width: 1000px; /* Limiting max width */
+    margin: 0 auto; /* Centering the content */
+}
+
+/* Heading for team section */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Team Cards Section */
+.team-cards {
+    display: flex;
+    justify-content: space-between; /* Space between the cards */
+    gap: 30px;
+    justify-items: center;
+}
+
+.team-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.team-card img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.team-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.team-card p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.team-card:hover {
+    transform: translateY(-10px); /* Hover effect */
+}
+
+/* Button Styling */
+.btn {
+    background-color: #FF5733; /* Button background color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #C70039; /* Hover effect color */
+}
+
+/* Footer Section */
+/* General Footer Styling */
+footer {
+    background-image: url('bg\ 2.jpg');
+    color: white;
+    text-align: center;
+    padding: 1px; /* Reduced padding */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    height: 200px; /* Footer height */
+    display: flex;
+    justify-content: space-between; /* Spaces between sections */
+    align-items: center;
+}
+
+footer p {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Quick Links section - Centered */
+.footer-box.quick-links {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    text-align: left;
+    flex: 1; /* Takes up available space */
+}
+
+.footer-box.quick-links h3 {
+    margin-bottom: 10px;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.footer-box.quick-links a {
+    color: #ECF0F1;
+    text-decoration: none;
+    margin: 3px 0;
+    font-size: 20px;
+}
+
+.footer-box.quick-links a:hover {
+    color: #3498DB;
+}
+
+/* About Us section - Left-aligned */
+.footer-box.about-us {
+    text-align: left;
+    flex: 1; /* Takes up available space */
+}
+
+.footer-box.about-us h3 {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer-box.about-us p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* For More Questions - Upper Right-aligned */
+.footer-box.for-more-questions {
+    position: absolute;
+    right: 20px;
+    width: 200px; /* Adjusted form width */
+    text-align: right;
+}
+
+.footer-box.for-more-questions h3 {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer-box.for-more-questions form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.footer-box.for-more-questions input {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #BDC3C7;
+}
+
+.footer-box.for-more-questions button {
+    padding: 8px;
+    background-color: #3498DB;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.footer-box.for-more-questions button:hover {
+    background-color: #2980B9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    footer {
+        padding: 5px 15px;
+        height: auto; /* Allow height to adjust on mobile */
+        flex-direction: column; /* Stack sections on mobile */
+        align-items: center; /* Center items */
+    }
+
+    .footer-box {
+        width: 10%;
+        text-align: center;
+    }
+
+    .footer-box.for-more-questions {
+        position: static;
+        margin-top: 10px;
+    }
+}
+

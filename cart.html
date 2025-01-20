@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - University Website</title>
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="UT.png" alt="University Logo" class="header-logo">
+        </div>
+        <h1><div class="logo">UniversiTools</div> </h1>
+<div class="nav-links">
+    <div class="nav-left">
+        <a href="index.html" class="btn">Home</a>
+        <a href="shop.html" class="btn">Shop</a>
+        <a href="employee.html" class="btn">Employee</a>
+        <a href="snake_game.html" class="btn">Play Snake Game</a> 
+    </div>
+    <div class="nav-right">
+        <a href="cart.html" class="btn">Cart</a>
+    </div>
+</div>
+        </div>
+    </header>
+
+
+    <!-- Cart Page Content -->
+    <main>
+        <h1>Your Cart</h1>
+        <div id="cart-container">
+            <div id="cart-empty-message" class="message">
+                <p>Your cart is empty. Start shopping now!</p>
+            </div>
+            <div id="cart-items"></div>
+            <div id="cart-summary">
+                <p><strong>Total: </strong><span id="cart-total">₱0.00</span></p>
+                <button id="checkout-btn" class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <!-- Quick Links section, aligned from right to left -->
+        <div class="footer-box quick-links">
+            <h3>Quick Links</h3>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="employee.html">Employee</a>
+        </div>
+    
+        <!-- About Us section, centered -->
+        <div class="footer-box about-us">
+            <h3>About Us</h3>
+            <p>We are committed to providing the best service possible.</p>
+        </div>
+    
+        <!-- For More Questions section, upper-right aligned -->
+        <div class="footer-box for-more-questions">
+            <h3>For more questions</h3>
+            <form>
+                <input type="email" placeholder="Enter your email">
+                <button type="submit">Email here</button>
+            </form>
+        </div>
+    </footer>
+
+    <script>
+        // Load the cart from localStorage and display it
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartContainer = document.getElementById('cart-items');
+            const emptyMessage = document.getElementById('cart-empty-message');
+            const cartTotal = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            cartContainer.innerHTML = ''; // Clear previous content
+
+            if (cart.length === 0) {
+                emptyMessage.style.display = 'block';
+                cartTotal.innerText = '₱0.00';
+                checkoutBtn.disabled = true;
+            } else {
+                emptyMessage.style.display = 'none';
+                let total = 0;
+
+                cart.forEach((item, index) => {
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+                    cartItem.innerHTML = `
+                        <div class="cart-item-details">
+                            <img src="${item.image}" alt="${item.name}">
+                            <div class="cart-item-info">
+                                <h3>${item.name}</h3>
+                                <p>${formatPHP(item.price)} x ${item.quantity}</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="remove-btn">Remove</button>
+                    `;
+                    cartContainer.appendChild(cartItem);
+                    total += item.price * item.quantity;
+                });
+
+                cartTotal.innerText = formatPHP(total);
+                checkoutBtn.disabled = false;
+            }
+        }
+
+        // Format price in PHP style
+        function formatPHP(price) {
+            return '₱' + price.toLocaleString('en-PH');
+        }
+
+        // Remove item from cart
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1); // Remove the item at the specified index
+            localStorage.setItem('cart', JSON.stringify(cart)); // Save the updated cart
+            loadCart(); // Refresh the cart page
+            updateCartCount(); // Update the cart count in the header
+        }
+
+        // Checkout function (currently a placeholder)
+        function checkout() {
+            alert("Proceeding to checkout...");
+        }
+
+        // Update the cart count in the header
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = cart.reduce((total, item) => total + item.quantity, 0); // Calculate total quantity
+            console.log("Updated cart count:", cartCount); // Debugging log
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        // Initial load
+        loadCart();
+        updateCartCount();
+    </script>
+</body>
+</html>

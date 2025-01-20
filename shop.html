@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Website - Shop</title>
+    <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="UT.png" alt="University Logo" class="header-logo">
+        </div>
+        <h1><div class="logo">UniversiTools</div> </h1>
+<div class="nav-links">
+    <div class="nav-left">
+        <a href="index.html" class="btn">Home</a>
+        <a href="shop.html" class="btn">Shop</a>
+        <a href="employee.html" class="btn">Employee</a>
+        <a href="snake_game.html" class="btn">Play Snake Game</a> 
+    </div>
+    <div class="nav-right">
+        <a href="cart.html" class="btn">Cart</a>
+    </div>
+</div>
+        </div>
+    </header>
+
+    <!-- Main Shop Content -->
+    <main>
+        <div class="search-container">
+            <input type="text" id="search-bar" class="search-bar" placeholder="Search for products..." oninput="filterItems()">
+        </div>
+
+        <div class="products" id="product-container">
+            <!-- Product Cards will be dynamically added here -->
+        </div>
+
+        <!-- Pagination Controls -->
+        <div id="pagination">
+            <button id="prev-btn" onclick="changePage(-1)">Previous</button>
+            <button id="next-btn" onclick="changePage(1)">Next</button>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <!-- Quick Links section, aligned from right to left -->
+        <div class="footer-box quick-links">
+            <h3>Quick Links</h3>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="employee.html">Employee</a>
+        </div>
+    
+        <!-- About Us section, centered -->
+        <div class="footer-box about-us">
+            <h3>About Us</h3>
+            <p>We are committed to providing the best service possible.</p>
+        </div>
+    
+        <!-- For More Questions section, upper-right aligned -->
+        <div class="footer-box for-more-questions">
+            <h3>For more questions</h3>
+            <form>
+                <input type="email" placeholder="Enter your email">
+                <button type="submit">Email here</button>
+            </form>
+        </div>
+    </footer>
+
+    <script>
+        // Updated list of products (total 40 items now)
+        let products = [
+            { id: 1, name: 'Notebook', price: 50, image: 'notebook.jpg' },
+            { id: 2, name: 'Ballpen', price: 20, image: 'ballpen.webp' },
+            { id: 3, name: 'Pencil', price: 10, image: 'pencil.png' },
+            { id: 4, name: 'Eraser', price: 15, image: 'eraser.jpg' },
+            { id: 5, name: 'Highlighter', price: 25, image: 'Highlighter.jpg' },
+            { id: 6, name: 'Ruler', price: 30, image: 'ruler.jpg' },
+            { id: 7, name: 'Scissors', price: 40, image: 'scissors.jpg' },
+            { id: 8, name: 'Glue Stick', price: 35, image: 'glue stick.jpg' },
+            { id: 9, name: 'Calculator', price: 500, image: 'calculator.jpg' },
+            { id: 10, name: 'School Bag', price: 1500, image: 'school bag.webp' },
+            { id: 11, name: 'Clear Book', price: 50, image: 'clear book.jpg' },
+            { id: 12, name: 'Pencil Case', price: 100, image: 'pencil case.jpg' },
+            { id: 13, name: 'Pentel Pen', price: 20, image: 'pentel pen.webp' },
+            { id: 14, name: 'Markers', price: 20, image: 'marker.jpg' },
+            { id: 15, name: 'Index Cards', price: 5, image: 'index cards.jpg' },
+            { id: 16, name: 'Crayons', price: 30, image: 'crayons.webp' },
+            { id: 17, name: 'Sticky Notes', price: 40, image: 'sticky note.jpg' },
+            { id: 18, name: 'Tape', price: 20, image: 'tape.jpg' },
+            { id: 19, name: 'Colored Pencils', price: 150, image: 'colored pencils.webp' },
+            { id: 20, name: 'Folder', price: 10, image: 'folder.jpg' },
+            // ... Add more products as required
+        ];
+
+        let currentPage = 1;
+        const itemsPerPage = 6;
+        let filteredProducts = products; // Initially, no filter applied
+
+        // Function to format prices (PHP style)
+        function formatPHP(price) {
+            return '₱' + price.toLocaleString('en-PH');
+        }
+
+        // Function to display products dynamically (with pagination)
+        function displayProducts(page) {
+            const start = (page - 1) * itemsPerPage;
+            const end = page * itemsPerPage;
+            const paginatedProducts = filteredProducts.slice(start, end);
+
+            const container = document.getElementById('product-container');
+            container.innerHTML = ''; // Clear previous content
+
+            paginatedProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${formatPHP(product.price)}</p>
+                    <button onclick="addToCart('${product.name}', ${product.price}, '${product.image}')">Add to Cart</button>
+                `;
+                container.appendChild(productCard);
+            });
+
+            // Handle pagination buttons
+            document.getElementById('prev-btn').disabled = page === 1;
+            document.getElementById('next-btn').disabled = page * itemsPerPage >= filteredProducts.length;
+        }
+
+        // Search functionality
+        function filterItems() {
+            const searchQuery = document.getElementById('search-bar').value.toLowerCase();
+            filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery));
+            currentPage = 1; // Reset to the first page after filtering
+            displayProducts(currentPage); // Re-display the filtered products
+        }
+
+        // Add to cart functionality
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProductIndex = cart.findIndex(item => item.name === name);
+
+            if (existingProductIndex >= 0) {
+                cart[existingProductIndex].quantity += 1;  // Increase quantity if already in cart
+            } else {
+                cart.push({ name, price, image, quantity: 1 });  // Add new item
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById('cart-count').innerText = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        // Page change functionality
+        function changePage(direction) {
+            currentPage += direction;
+            displayProducts(currentPage);
+        }
+
+        // Initial product display
+        displayProducts(currentPage);
+    </script>
+</body>
+</html>

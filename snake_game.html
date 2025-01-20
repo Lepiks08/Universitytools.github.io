@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game - UniversiTools</title>
+    <link rel="stylesheet" href="home.css"> <!-- Link to your existing CSS file -->
+    <style>
+        body {
+            background-color: #2f2f2f;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #f9a825;
+            margin-top: 50px;
+        }
+
+        canvas {
+            border: 5px solid #f9a825;
+            background-color: #000;
+            margin-top: 30px;
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .scoreboard {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #f9a825;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #f57f17;
+        }
+
+        .instructions {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #fff;
+            font-weight: 300;
+        }
+
+        .instructions span {
+            color: #f9a825;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Snake Game</h1>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <div class="scoreboard">
+            <span>Score: </span><span id="score">0</span>
+        </div>
+        <div class="instructions">
+            Use the <span>Arrow Keys</span> to control the snake.
+        </div>
+        <a href="index.html" class="back-btn">Back to Home</a> <!-- Button to return to home page -->
+    </div>
+
+    <script src="snake.js"></script> <!-- Link to Snake game JavaScript file -->
+</body>
+</html>
